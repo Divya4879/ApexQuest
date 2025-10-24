@@ -1,12 +1,12 @@
 import { GoogleGenAI } from "@google/genai";
 import { Post, User, Role } from '../types';
 
-const API_KEY = process.env.API_KEY;
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 if (!API_KEY) {
   // This is a fallback for development if the API key isn't set.
   // In a real production environment, this should be handled more gracefully.
-  console.warn("API_KEY environment variable not set. Gemini API calls will fail.");
+  console.warn("VITE_GEMINI_API_KEY environment variable not set. Gemini API calls will fail.");
 }
 
 const ai = new GoogleGenAI({ apiKey: API_KEY });
