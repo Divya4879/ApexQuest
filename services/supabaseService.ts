@@ -263,12 +263,6 @@ export const postService = {
   async createPost(post: Omit<Post, 'id' | 'likes_count' | 'replies_count' | 'is_flagged' | 'created_at' | 'updated_at'>): Promise<Post> {
     if (!supabase) throw new Error('Supabase not configured');
     
-    // 🔐 Auth0 for AI Agents - Authenticate user agent for post creation
-    const isAuthorized = await agentAuthService.validateAgentAction('user', 'create_post');
-    if (!isAuthorized) {
-      throw new Error('User agent not authorized to create posts');
-    }
-    
     // Get user email and check if banned
     const { data: user } = await supabase
       .from('users')
@@ -294,8 +288,6 @@ export const postService = {
       .single();
 
     if (error) throw error;
-    
-    console.log(`🤖 User agent successfully created post: ${data.id}`);
     return data;
   },
 
