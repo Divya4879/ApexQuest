@@ -101,7 +101,7 @@ export const AgentActivityDashboard: React.FC = () => {
       <div className="bg-gray-800 rounded-lg p-6 max-w-6xl w-full mx-4 max-h-[90vh] overflow-hidden">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold text-white flex items-center gap-2">
-            🔐 Agentic AI with Auth0 Security
+            🏆 Auth0 for AI Agents Challenge
           </h2>
           <div className="flex gap-2">
             <button
@@ -120,24 +120,52 @@ export const AgentActivityDashboard: React.FC = () => {
         </div>
 
         <div className="bg-gray-900 rounded p-4 mb-4">
-          <div className="text-sm text-gray-300 mb-2">
-            <strong>Autonomous AI Agents with Auth0 Security:</strong>
+          <div className="text-sm text-gray-300 mb-3">
+            <strong>🔐 Secure AI Agent Authentication with Auth0:</strong>
           </div>
-          <div className="grid grid-cols-3 gap-4 text-sm">
-            <div className="text-center">
-              <div className="text-2xl mb-1">👑</div>
+          <div className="grid grid-cols-3 gap-4 text-sm mb-4">
+            <div className="text-center p-3 bg-gray-800 rounded">
+              <div className="text-2xl mb-2">👑</div>
               <div className="text-yellow-400 font-medium">Admin Agent</div>
-              <div className="text-gray-400">Autonomous escalation handling</div>
+              <div className="text-gray-400 text-xs">M2M Client ID: JgWs...WseS</div>
+              <div className="text-green-400 text-xs">✅ admin:manage scope</div>
+              <div className="text-gray-300 text-xs mt-1">Autonomous ban decisions</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl mb-1">🛡️</div>
+            <div className="text-center p-3 bg-gray-800 rounded">
+              <div className="text-2xl mb-2">🛡️</div>
               <div className="text-blue-400 font-medium">Moderator Agent</div>
-              <div className="text-gray-400">AI-powered content analysis</div>
+              <div className="text-gray-400 text-xs">M2M Client ID: 2oLz...qmxr</div>
+              <div className="text-green-400 text-xs">✅ mod:warn scope</div>
+              <div className="text-gray-300 text-xs mt-1">AI content analysis</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl mb-1">🤖</div>
-              <div className="text-green-400 font-medium">Multi-Step Workflows</div>
-              <div className="text-gray-400">Analyze → Decide → Act → Report</div>
+            <div className="text-center p-3 bg-gray-800 rounded">
+              <div className="text-2xl mb-2">👤</div>
+              <div className="text-green-400 font-medium">User Agent</div>
+              <div className="text-gray-400 text-xs">M2M Client ID: fTcL...QuLy</div>
+              <div className="text-green-400 text-xs">✅ user:post scope</div>
+              <div className="text-gray-300 text-xs mt-1">Secure content creation</div>
+            </div>
+          </div>
+          
+          <div className="bg-blue-900/30 border border-blue-500/50 rounded p-3">
+            <div className="text-blue-300 font-medium mb-2">🏆 Challenge Requirements Met:</div>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="flex items-center gap-2">
+                <span className="text-green-400">✅</span>
+                <span className="text-gray-300">Authenticate the user (Auth0 login)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-green-400">✅</span>
+                <span className="text-gray-300">Control agent tools (M2M scopes)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-green-400">✅</span>
+                <span className="text-gray-300">Limit agent knowledge (role-based)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-green-400">✅</span>
+                <span className="text-gray-300">Secure agent authentication</span>
+              </div>
             </div>
           </div>
         </div>
@@ -266,8 +294,9 @@ export const AgentActivityDashboard: React.FC = () => {
           )}
         </div>
 
-        <div className="mt-4 text-xs text-gray-400 text-center">
-          🤖 Autonomous AI Agents • 🔐 Secured by Auth0 • 🧠 Multi-Step Decision Making
+        <div className="mt-4 text-xs text-gray-400 text-center bg-gray-900 rounded p-2">
+          🏆 <strong className="text-blue-400">Auth0 for AI Agents Challenge Entry</strong> 🏆<br/>
+          🔐 Machine-to-Machine Authentication • 🤖 Autonomous Agent Decisions • 🛡️ Scope-Based Security
         </div>
       </div>
     </div>
