@@ -4,6 +4,7 @@ import { channelRequestService } from '../services/channelRequestService';
 import { supabase } from '../services/supabaseService';
 import { notificationService } from '../services/notificationService';
 import { staffService, type ChannelAnalytics, type FlaggedPost } from '../services/staffService';
+import { agenticModerationService } from '../services/agenticModerationService';
 
 interface ActionButtonProps {
   label: string;
@@ -305,11 +306,23 @@ export const InteractiveAgent: React.FC<InteractiveAgentProps> = ({
                 {userRole === 'moderator' && (
                   <>
                     <ActionButton
-                      label="⚠️ Warn User"
+                      label="🤖 Auto-Moderate"
                       variant="warn"
                       onClick={async () => {
-                        const reason = prompt('Warning reason:') || 'Inappropriate content';
-                        await staffService.warnUser(item.id, item.user_id, userId, reason);
+                        const reason = prompt('Flag reason for AI analysis:') || 'Policy violation';
+                        console.log(`🤖 Starting autonomous moderation for post ${item.id}`);
+                        
+                        const report = await agenticModerationService.moderatorAgentProcess(item.id, reason, userId);
+                        agenticModerationService.storeAgentReport(report);
+                        
+                        // Check if escalation needed
+                        if (report.decision.action === 'escalate') {
+                          console.log(`🚨 Escalating to admin agent...`);
+                          // Auto-escalate to admin if available
+                          const adminReport = await agenticModerationService.adminAgentProcess(report, userId);
+                          agenticModerationService.storeAgentReport(adminReport);
+                        }
+                        
                         await loadStaffData();
                       }}
                     />
@@ -326,11 +339,30 @@ export const InteractiveAgent: React.FC<InteractiveAgentProps> = ({
                 {userRole === 'admin' && (
                   <>
                     <ActionButton
-                      label="🚫 Ban User (24h)"
+                      label="👑 Admin Auto-Review"
                       variant="ban"
                       onClick={async () => {
-                        const reason = prompt('Ban reason:') || 'Inappropriate content';
-                        await staffService.banUser(item.user_id, userId, reason);
+                        const reason = prompt('Flag reason for admin AI analysis:') || 'Serious violation';
+                        console.log(`👑 Starting admin autonomous review for post ${item.id}`);
+                        
+                        // Create mock escalated case for admin review
+                        const mockEscalation = {
+                          agentType: 'moderator' as const,
+                          postId: item.id,
+                          userId: item.user_id,
+                          decision: {
+                            action: 'escalate' as const,
+                            severity: 'high' as const,
+                            reasoning: reason,
+                            confidence: 85
+                          },
+                          executedActions: ['Flagged for admin review'],
+                          timestamp: new Date().toISOString()
+                        };
+                        
+                        const adminReport = await agenticModerationService.adminAgentProcess(mockEscalation, userId);
+                        agenticModerationService.storeAgentReport(adminReport);
+                        
                         await loadStaffData();
                       }}
                     />
