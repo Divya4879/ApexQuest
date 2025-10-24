@@ -179,7 +179,9 @@ const PostCard = ({ post }: PostCardProps) => {
               🗑️
             </button>
           )}
-          {user && (user.id !== reply.user?.id || user.role === 'admin' || user.role === 'moderator') && (
+          {user && (
+            user.id !== reply.user?.id || user.role === 'admin' || user.role === 'moderator'
+          ) && reply.user?.role !== 'admin' && (
             <button
               onClick={() => handleReplyFlag(reply.id)}
               className="text-gray-400 hover:text-red-400 transition-colors"
@@ -225,7 +227,9 @@ const PostCard = ({ post }: PostCardProps) => {
               🗑️
             </button>
           )}
-          {user && (user.id !== post.user_id || user.role === 'admin' || user.role === 'moderator') && (
+          {user && (
+            user.id !== post.user_id || user.role === 'admin' || user.role === 'moderator'
+          ) && post.user?.role !== 'admin' && (
             <button
               onClick={handleFlag}
               className="text-gray-400 hover:text-red-400 transition-colors"
