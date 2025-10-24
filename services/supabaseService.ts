@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { banService } from './banService';
+import { agentAuthService } from './agentAuthService';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
@@ -262,6 +263,12 @@ export const postService = {
   async createPost(post: Omit<Post, 'id' | 'likes_count' | 'replies_count' | 'is_flagged' | 'created_at' | 'updated_at'>): Promise<Post> {
     if (!supabase) throw new Error('Supabase not configured');
     
+    // 🔐 Auth0 for AI Agents - Authenticate user agent for post creation
+    const isAuthorized = await agentAuthService.validateAgentAction('user', 'create_post');
+    if (!isAuthorized) {
+      throw new Error('User agent not authorized to create posts');
+    }
+    
     // Get user email and check if banned
     const { data: user } = await supabase
       .from('users')
@@ -287,6 +294,8 @@ export const postService = {
       .single();
 
     if (error) throw error;
+    
+    console.log(`🤖 User agent successfully created post: ${data.id}`);
     return data;
   },
 
@@ -444,6 +453,12 @@ export const replyService = {
   async createReply(reply: Omit<Reply, 'id' | 'level' | 'likes_count' | 'is_flagged' | 'created_at' | 'updated_at'>): Promise<Reply> {
     if (!supabase) throw new Error('Supabase not configured');
     
+    // 🔐 Auth0 for AI Agents - Authenticate user agent for reply creation
+    const isAuthorized = await agentAuthService.validateAgentAction('user', 'create_reply');
+    if (!isAuthorized) {
+      throw new Error('User agent not authorized to create replies');
+    }
+    
     // Get user email and check if banned
     const { data: user } = await supabase
       .from('users')
@@ -472,6 +487,7 @@ export const replyService = {
     // Update replies count on post
     await supabase.rpc('increment_post_replies', { post_id: reply.post_id });
 
+    console.log(`🤖 User agent successfully created reply: ${data.id}`);
     return data;
   },
 

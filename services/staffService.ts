@@ -1,7 +1,7 @@
 import { supabase } from './supabaseService';
 import { notificationService } from './notificationService';
-
 import { banService } from './banService';
+import { agentAuthService } from './agentAuthService';
 
 export interface ChannelAnalytics {
   id: string;
@@ -163,6 +163,12 @@ export const staffService = {
 
   // Moderator actions
   async warnUser(postId: string, userId: string, moderatorId: string, reason: string): Promise<void> {
+    // 🔐 Auth0 for AI Agents - Authenticate mod agent
+    const isAuthorized = await agentAuthService.validateAgentAction('mod', 'warn_user');
+    if (!isAuthorized) {
+      throw new Error('Moderator agent not authorized to warn users');
+    }
+
     if (!supabase) throw new Error('Supabase not configured');
 
     // Create warning
@@ -215,7 +221,7 @@ export const staffService = {
       }
     }
 
-    console.log(`User ${userId} warned. Total warnings: ${warningCount}`);
+    console.log(`🤖 Mod agent successfully warned user. Total warnings: ${warningCount}`);
   },
 
   async dismissFlag(postId: string): Promise<void> {
@@ -239,6 +245,12 @@ export const staffService = {
   // Admin actions
   // Admin actions
   async banUser(userId: string, adminId: string, reason: string): Promise<void> {
+    // 🔐 Auth0 for AI Agents - Authenticate admin agent
+    const isAuthorized = await agentAuthService.validateAgentAction('admin', 'ban_user');
+    if (!isAuthorized) {
+      throw new Error('Admin agent not authorized to ban users');
+    }
+
     // Get user email first
     if (!supabase) throw new Error('Supabase not configured');
     
@@ -250,6 +262,7 @@ export const staffService = {
     
     if (user?.email) {
       await banService.banUserByEmail(user.email, adminId, reason);
+      console.log(`🤖 Admin agent successfully banned user: ${user.email}`);
     }
   },
 
@@ -333,6 +346,12 @@ export const staffService = {
 
   // Unban user (admin only)
   async unbanUser(userId: string, adminId: string): Promise<void> {
+    // 🔐 Auth0 for AI Agents - Authenticate admin agent
+    const isAuthorized = await agentAuthService.validateAgentAction('admin', 'unban_user');
+    if (!isAuthorized) {
+      throw new Error('Admin agent not authorized to unban users');
+    }
+
     // Get user email first
     if (!supabase) throw new Error('Supabase not configured');
     
@@ -344,6 +363,7 @@ export const staffService = {
     
     if (user?.email) {
       await banService.unbanEmail(user.email);
+      console.log(`🤖 Admin agent successfully unbanned user: ${user.email}`);
     }
   }
 };
