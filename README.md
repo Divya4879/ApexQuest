@@ -1,18 +1,24 @@
-# 🏆 ApexQuest - Auth0 for AI Agents Challenge
+# 🏆 ApexQuest
 
-> **A secure community platform with autonomous AI agents powered by Auth0 Machine-to-Machine authentication**
+**A community platform with autonomous AI agents powered by Auth0 M2M authentication**
+
+<div align="center">
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge)](https://apexquest.netlify.app)
-[![Auth0 Challenge](https://img.shields.io/badge/Auth0-AI%20Agents%20Challenge-orange?style=for-the-badge)](https://dev.to/challenges/auth0)
+[![Auth0 Challenge](https://img.shields.io/badge/Auth0-AI%20Agents%20Challenge-orange?style=for-the-badge)](https://dev.to/challenges/auth0-2025-10-08)
 
-## 🌟 Product Overview
+<img width="1920" height="3688" alt="ApexQuest Platform Screenshot" src="https://github.com/user-attachments/assets/f4fcfed5-b37f-4c14-8464-5f84586013b5" />
 
-**ApexQuest** is a revolutionary social media platform designed for personal growth enthusiasts. Users join topic-based communities, share their progress, and receive AI-powered insights in a secure, authenticated environment. Built specifically for the **Auth0 for AI Agents Challenge**, it showcases enterprise-grade security for autonomous AI systems.
+</div>
+
+## Project Overview
+
+**ApexQuest** is a social media platform designed for personal growth enthusiasts. Users can join topic-based communities, share their progress, connect with like-minded peers and receive AI-powered insights in a secure, authenticated environment. Built specifically for the **Auth0 for AI Agents Challenge**, it showcases enterprise-grade security for autonomous AI systems.
 
 ### 🎯 The Personal Growth Revolution
 Transform your self-improvement journey through:
-- **10 Growth Categories**: Fitness, Learning, Career, Finance, Mental Health, Relationships, and more
-- **AI-Powered Community**: Intelligent content moderation and personalized insights
+- **10+ Channel Categories**: Fitness, Learning, Career, Finance, Mental Health, Relationships, and more
+- **Like-Minded Community**: Intelligent content moderation and personalized insights
 - **Secure Environment**: Enterprise-grade authentication protecting every interaction
 - **Real-time Engagement**: Live notifications, instant updates, and community connections
 
@@ -20,14 +26,16 @@ Transform your self-improvement journey through:
 
 ApexQuest demonstrates **Auth0 for AI Agents** by implementing secure, autonomous AI agents that authenticate via Machine-to-Machine (M2M) credentials before performing actions. Each agent type has specific scopes and permissions, showcasing enterprise-grade security for AI systems.
 
-### ✅ Challenge Requirements - 100% Complete
+### ✅ Challenge Requirements - 100% Met
 
-| Requirement | Implementation | Status |
-|-------------|----------------|---------|
-| **Authenticate the user** | Auth0 React SDK with role-based access | ✅ **Complete** |
-| **Control the tools** | M2M scopes limit agent capabilities | ✅ **Complete** |
-| **Limit knowledge** | Role-based content access and permissions | ✅ **Complete** |
-| **Secure agent authentication** | Each agent authenticates before every action | ✅ **Complete** |
+````
+| Requirement             | Implementation                                   | Status       |
+|-------------------------|--------------------------------------------------|----- --------|
+| Authenticate the user       | Auth0 React SDK with role-based access       | ✅ Complete |
+| Control the tools           | M2M scopes limit agent capabilities          | ✅ Complete |
+| Limit knowledge             | Role-based content access and permissions    | ✅ Complete |
+| Secure agent authentication | Each agent authenticates before every action | ✅ Complete |
+````
 
 ### 🤖 AI Agent Architecture
 
@@ -49,8 +57,8 @@ ApexQuest demonstrates **Auth0 for AI Agents** by implementing secure, autonomou
 ## 🚀 Key Features
 
 ### 🏘️ Community Platform
-- **Smart Channel System**: 10 personal growth categories with rich content feeds
-- **Real-time Interactions**: Posts, replies, likes with instant notifications
+- **Smart Channel System**: 10+  growth categories with rich content feeds
+- **Real-time Interactions**: Posts, replies, likes 
 - **Progress Tracking**: Visual journey mapping for personal development
 - **Community Safety**: AI-moderated environment with automated content review
 
@@ -77,7 +85,7 @@ ApexQuest demonstrates **Auth0 for AI Agents** by implementing secure, autonomou
 ### Backend & Services
 - **Supabase** - PostgreSQL database with real-time subscriptions
 - **Auth0** - Enterprise identity platform with M2M agent authentication
-- **Google Gemini AI** - Advanced content analysis and moderation decisions
+- **Google Gemini AI API** - Advanced content analysis and moderation decisions
 - **Netlify** - Global deployment with automatic CI/CD
 
 ### Security Architecture
@@ -99,25 +107,52 @@ ApexQuest demonstrates **Auth0 for AI Agents** by implementing secure, autonomou
 
 ```
 apexquest/
-├── components/           # React UI components
-│   ├── AgentActivityDashboard.tsx    # Real-time agent monitoring
+├── components/                       # React UI components
+│   ├── AgentActivityDashboard.tsx    # Real-time agent monitoring dashboard
+│   ├── AgentModal.tsx                # Agent interaction modal dialogs
+│   ├── Auth0Provider.tsx             # Auth0 authentication wrapper
+│   ├── BannedPage.tsx                # Page displayed to banned users
+│   ├── CreatePostForm.tsx            # Post creation form with validation
+│   ├── Header.tsx                    # Main navigation header
 │   ├── InteractiveAgent.tsx          # Autonomous moderation interface
-│   ├── PostCard.tsx                  # Content display with security
-│   ├── NotificationBell.tsx          # Real-time notifications
-│   └── ...
-├── services/            # Core business logic
-│   ├── agentAuthService.ts           # Auth0 M2M authentication
-│   ├── agenticModerationService.ts   # Autonomous AI moderation
-│   ├── supabaseService.ts            # Database operations
-│   ├── geminiService.ts              # AI content analysis
-│   └── ...
-├── pages/               # Application routes
+│   ├── NotificationBell.tsx          # Real-time notification system
+│   ├── PostCard.tsx                  # Content display with security features
+│   ├── PostFeed.tsx                  # Community content feed
+│   └── Sidebar.tsx                   # Navigation sidebar with channels
+├── services/                         # Core business logic
+│   ├── adminService.ts               # Admin user management operations
+│   ├── agentAuthService.ts           # Auth0 M2M authentication for AI agents
+│   ├── agenticModerationService.ts   # Autonomous AI moderation workflows
+│   ├── banService.ts                 # User banning and suspension logic
+│   ├── channelRequestService.ts      # Channel creation and management
+│   ├── geminiService.ts              # Google AI content analysis
+│   ├── notificationService.ts        # Real-time notification delivery
+│   ├── staffService.ts               # Moderation tools and staff actions
+│   ├── supabaseService.ts            # Database operations and real-time sync
+│   └── userService.ts                # User profile and credential management
+├── pages/                            # Application routes
 │   ├── AgentPage.tsx                 # AI agent management dashboard
-│   ├── HomePage.tsx                  # Community feed
-│   ├── LandingPage.tsx               # Marketing and onboarding
-│   └── ...
-├── sql/                 # Database schema and migrations
-└── context/             # React state management
+│   ├── ChannelSelectionPage.tsx      # Growth category selection interface
+│   ├── HomePage.tsx                  # Main community feed and interactions
+│   ├── LandingPage.tsx               # Marketing page and user onboarding
+│   └── ProfilePage.tsx               # User profile and settings management
+├── context/                          # React state management
+│   └── AppContext.tsx                # Global application state and Auth0 integration
+├── sql/                              # Database schema and migrations
+│   ├── supabase-schema.sql           # Core database schema
+│   ├── admin-system-complete.sql     # Admin and moderation system
+│   ├── create-user-warnings-table.sql # User warning system
+│   ├── create-banned-users-table.sql # User banning system
+│   ├── add-user-agent-credentials.sql # Auth0 agent credentials storage
+│   └── [38 other migration files]    # Database evolution and fixes
+├── App.tsx                           # Main application component
+├── index.tsx                         # React application entry point
+├── types.ts                          # TypeScript type definitions
+├── constants.ts                      # Application constants and configurations
+├── vite.config.ts                    # Vite build configuration
+├── package.json                      # Dependencies and scripts
+├── tsconfig.json                     # TypeScript configuration
+└── netlify.toml                      # Netlify deployment configuration
 ```
 
 ## 🔧 Setup & Installation
@@ -130,8 +165,8 @@ apexquest/
 
 ### 1. Clone and Install
 ```bash
-git clone https://github.com/yourusername/apexquest.git
-cd apexquest
+git clone https://github.com/Divya4879/ApexQuest.git
+cd ApexQuest
 npm install
 ```
 
@@ -141,11 +176,13 @@ npm install
 1. **Regular Web Application** for user authentication
 2. **Machine-to-Machine Applications** for AI agents:
 
-| Application Name | Type | Scopes | Purpose |
-|------------------|------|--------|---------|
-| `apexquest-admin-agent` | M2M | `admin:manage` | User bans, escalations |
-| `apexquest-mod-agent` | M2M | `mod:warn` | Content moderation |
-| `apexquest-user-agent` | M2M | `user:post` | Content creation |
+````
+| Application Name        | Type | Scopes         | Purpose                |
+|-------------------------|------|----------------|------------------------|
+| `apexquest-admin-agent` | M2M  | `admin:manage` | User bans, escalations |
+| `apexquest-mod-agent`   | M2M  | `mod:warn`     | Content moderation     |
+| `apexquest-user-agent`  | M2M  | `user:post`    | Content creation       |
+````
 
 #### Create Auth0 API
 - **Name**: `apexquest-agents-api`
@@ -176,44 +213,38 @@ VITE_GEMINI_API_KEY=your-gemini-api-key
 ```
 
 ### 4. Database Setup
-Run the SQL files in `/sql/` directory in your Supabase SQL editor:
-```sql
--- Core schema
-\i supabase-schema.sql
--- Admin system  
-\i admin-system-complete.sql
--- User warnings and bans
-\i create-user-warnings-table.sql
-\i create-banned-users-table.sql
-```
+Run the SQL files in `/sql/` directory in your Supabase SQL editor.
 
 ### 5. Development Server
 ```bash
 npm run dev
 ```
-Visit `http://localhost:5173` to see ApexQuest!
+Visit `http://localhost:3000` to see ApexQuest!
 
 ## 🎮 How It Works
 
 ### User Experience
-1. **Sign up/Login** with Auth0 (supports social logins)
-2. **Select Growth Channels** from 10 personal development categories
-3. **Create Content** - Posts and replies are authenticated by User Agent
-4. **Community Interaction** - Like, comment, and engage with others
-5. **AI Insights** - Receive intelligent feedback on your progress
+1. **Sign up/Login** with Auth0 - Email/password or Google Authentication
+2. **Select Growth Channels** from 10+ personal development categories.
+3. **Create Content** - Posts and replies are authenticated by User Agent.
+4. **Community Interaction** - Like, comment, and engage with others.
+5. **AI Insights** - Receive intelligent feedback on your posts & platform interactions.
 
 ### Moderator Experience  
 1. **Access Agent Dashboard** via 🤖 icon in sidebar
 2. **Review Flagged Content** in the moderation interface
 3. **Use "🤖 Auto-Moderate"** - AI analyzes content and makes decisions
 4. **Monitor Agent Activity** - Real-time dashboard shows all AI decisions
+5. **Message** admin or create a community post.
 
 ### Admin Experience
 1. **Use "👑 Admin Auto-Review"** for serious violations
 2. **Autonomous User Management** - AI handles bans based on violation history
 3. **Complete Oversight** - Monitor all agent activities and decisions
+4. **Message staff**
+5. **Create new channels** - upto 18 channels on the platform
 
-## 🔍 AI Agent Demo Flow
+## 🔍 AI Agent Flow
 
 ### Autonomous Moderation Process
 ```typescript
@@ -238,11 +269,13 @@ console.log(`Agent decision: ${decision.action} - ${decision.reasoning}`);
 
 ## 📊 Agent Capabilities Matrix
 
-| Agent Type | Auth0 Scope | Autonomous Capabilities | Use Cases |
-|------------|-------------|------------------------|-----------|
-| **Admin Agent** | `admin:manage` | User bans, escalation handling, policy enforcement | Repeat offenders, serious violations |
-| **Moderator Agent** | `mod:warn` | Content analysis, warnings, escalation decisions | Automated content moderation |
-| **User Agent** | `user:post` | Secure content creation, interaction authentication | All user-generated content |
+````
+| Agent Type      | Auth0 Scope      | Autonomous Capabilities                             | Use Cases                            |
+|-----------------|------------------|-----------------------------------------------------|--------------------------------------|
+| Admin Agent     | `admin:manage`   | User bans, escalation handling, policy enforcement  | Repeat offenders, serious violations |
+| Moderator Agent | `mod:warn`       | Content analysis, warnings, escalation decisions    | Automated content moderation         |
+| User Agent      | `user:post`      | Secure content creation, interaction authentication | All user-generated content           |
+````
 
 ## 🚀 Deployment
 
@@ -254,7 +287,7 @@ console.log(`Agent decision: ${decision.action} - ${decision.reasoning}`);
   publish = "dist"
 
 [build.environment]
-  SECRETS_SCAN_ENABLED = "false"
+  SECRETS_SCAN_ENABLED = "true"
 ```
 
 ### Production Considerations
@@ -267,24 +300,21 @@ console.log(`Agent decision: ${decision.action} - ${decision.reasoning}`);
 
 ### Technical Roadmap
 - **Backend API**: Move M2M secrets to secure server-side implementation
-- **Advanced RAG**: Knowledge base integration with role-based access
 - **Multi-Agent Workflows**: Collaborative AI agent decision making
-- **Real-time Monitoring**: Live agent activity dashboard with analytics
 
 ### Product Roadmap  
-- **Mobile Apps**: Native iOS and Android applications
 - **Advanced Analytics**: User growth tracking and community insights
 - **Gamification**: Achievement system and progress rewards
 - **Enterprise Features**: White-label deployments and custom branding
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Follow TypeScript and React best practices
-4. Add tests for new functionality
-5. Update documentation as needed
-6. Submit pull request with detailed description
+1. Fork the repository.
+2. Create feature branch (`git checkout -b feature/amazing-feature`).
+3. Follow TypeScript and React best practices.
+4. Add tests for new functionality.
+5. Update documentation as needed.
+6. Submit pull request with detailed description.
 
 ## 📄 License
 
@@ -292,19 +322,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-### Challenge Recognition
-**Built for the Auth0 for AI Agents Challenge** - demonstrating the future of secure, autonomous AI systems with enterprise-grade authentication.
-
 ### Technology Partners
 - **[Auth0](https://auth0.com)** - Enterprise identity and authentication platform
 - **[Supabase](https://supabase.com)** - Real-time database and backend services
 - **[Google AI](https://ai.google.dev)** - Advanced language models for content analysis
 - **[Netlify](https://netlify.com)** - Modern deployment and hosting platform
-
----
-
-**🏆 Auth0 for AI Agents Challenge Entry**
-
-*Showcasing the future of secure, autonomous AI systems with production-ready authentication architecture.*
-
-**Live Demo**: [https://apexquest.netlify.app](https://apexquest.netlify.app)
