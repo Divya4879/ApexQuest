@@ -13,6 +13,7 @@ type Page = 'landing' | 'channel-selection' | 'home' | 'profile' | 'agent' | 'ba
 
 import { banService } from './services/banService';
 import BannedPage from './components/BannedPage';
+import AgentActivityDashboard from './components/AgentActivityDashboard';
 
 function App() {
   const { isAuthenticated, isLoading, loginWithRedirect, user: auth0User } = useAuth0();
@@ -141,6 +142,9 @@ function App() {
         {currentPage === 'agent' && (
           <AgentPage onNavigate={handleNavigate} />
         )}
+        
+        {/* Auth0 for AI Agents Activity Dashboard */}
+        <AgentActivityDashboard />
       </AppProvider>
     </div>
   );
